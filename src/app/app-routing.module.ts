@@ -5,15 +5,20 @@ import { FeaturesComponent } from './features/features.component';
 const routes: Routes = [
   {
     path: '',
-    component: FeaturesComponent,
     children: [
       {
         path: 'auth',
         loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
       },
       {
-        path: '',
-        loadChildren: () => import('./features/features.module').then((m) => m.FeaturesModule),
+        path: 'products',
+        loadChildren: () =>
+          import('./features/products/products.module').then((m) => m.ProductsModule),
+      },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./features/users/users.module').then((m) => m.UsersModule),
       },
     ],
   },
