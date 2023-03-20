@@ -1,19 +1,28 @@
-<nz-table #basicTable [nzData]="listOfData">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Marca</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of basicTable.data">
-      <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>
-        <a routerLink="/products/detail">Detail</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a>Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+<nz-card nzTitle="Productos" [nzExtra]="extraTemplate">
+  <nz-table #basicTable [nzData]="listOfData" [nzFrontPagination]="false">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.marca }}</td>
+        <td>
+          <a [routerLink]="['/products/detail', data.id]">Detalle</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
+<ng-template #extraTemplate>
+  <a routerLink="/products/create">Crear producto</a>
+</ng-template>
+
+
+

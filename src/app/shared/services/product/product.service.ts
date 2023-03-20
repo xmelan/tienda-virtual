@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService extends BaseService<Product> {
 
-  constructor(private http : HttpClient) {
-    super(http, 'Products');
+  constructor(private _http : HttpClient) {
+    super(_http, 'Products');
    }
 }

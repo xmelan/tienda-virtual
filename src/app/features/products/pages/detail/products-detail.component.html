@@ -1,15 +1,64 @@
-<nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-  <nz-card-meta
-    nzTitle="Card title"
-    nzDescription="This is the description"
-    [nzAvatar]="avatarTemplate"
-  ></nz-card-meta>
+<nz-card nzTitle="Detalle de producto">
+  <div nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="6">
+      <div class="inner-box" [style.border-color]="selectedColor">
+        <img
+          nz-image
+          width="200px"
+          height="200px"
+          nzSrc="error"
+          [nzFallback]="fallback"
+          [ngStyle]="{ 'border-color': '#00000'}"
+          alt=""
+        />
+        {{selectedColor}}
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="18">
+      <div class="inner-box">
+        <nz-descriptions [nzTitle]="product.name">
+          <nz-descriptions-item nzTitle="Marca" [nzSpan]="3"
+            >Zhou Maomao</nz-descriptions-item
+          >
+          <nz-descriptions-item nzTitle="Costo" [nzSpan]="3"
+            >18100000000</nz-descriptions-item
+          >
+          <nz-descriptions-item nzTitle="Color" [nzSpan]="3">
+            <!-- <nz-tag
+            *ngFor="let tag of product.productByPrices"
+            nzMode="checkable"
+            (nzCheckedChange)="selectColor($event, tag)"
+          >
+            {{ tag.color }}
+          </nz-tag> -->
+            <nz-radio-group
+              [(ngModel)]="selectedColor"
+              nzButtonStyle="solid"
+              (ngModelChange)="selectColor($event)"
+            >
+              <label
+                nz-radio-button
+                *ngFor="let option of product.productByPrices"
+                [nzValue]="option.color"
+                >{{ option.color }}</label
+              >
+            </nz-radio-group>
+          </nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+    </div>
+  </div>
 </nz-card>
 <ng-template #avatarTemplate>
-  <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+  <nz-avatar
+    nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+  ></nz-avatar>
 </ng-template>
 <ng-template #coverTemplate>
-  <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+  <img
+    alt="example"
+    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+  />
 </ng-template>
 <ng-template #actionSetting>
   <span nz-icon nzType="setting"></span>
