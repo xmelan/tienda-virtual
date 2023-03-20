@@ -15,9 +15,6 @@
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/">Home</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
             <a routerLink="/products/list">Productos</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -36,6 +33,9 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></span>
         </span>
+        <a routerLink="/users/list">
+          Cerrar Sesión
+        </a>
       </div>
     </nz-header>
     <nz-content>
