@@ -1,4 +1,4 @@
-<!-- <nz-layout class="app-layout">
+<nz-layout class="app-layout">
   <nz-sider class="menu-sidebar"
             nzCollapsible
             nzWidth="256px"
@@ -8,20 +8,17 @@
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>Tienda virtual</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/">Home</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
             <a routerLink="/products/list">Productos</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/users/list">Users</a>
+            <a routerLink="/users/list">Usuarios</a>
           </li>
         </ul>
       </li>
@@ -36,6 +33,9 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></span>
         </span>
+        <a routerLink="/auth/login">
+          Cerrar Sesión
+        </a>
       </div>
     </nz-header>
     <nz-content>
@@ -44,4 +44,4 @@
       </div>
     </nz-content>
   </nz-layout>
-</nz-layout> -->
+</nz-layout>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,28 +9,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  validateForm!: FormGroup;
+  Login!: FormGroup;
+
+  constructor(private fb: FormBuilder, private services: AuthService, private route: Router){ 
+    localStorage.clear();
+  }
+
+  ngOnInit(): void {
+    this.Login = this.fb.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    });
+  }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+    if (this.Login.valid) {
+      this.services.post(this.Login.value, 'Login').subscribe(result => {
+        if(result != null){
+          localStorage.setItem('token', `${result.token}`)
+          this.route.navigate([''])
+        }
+      });
     } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+      Object.values(this.Login.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
-  }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
-    });
   }
 }
