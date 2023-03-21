@@ -20,7 +20,7 @@ export class BaseService<T> {
     return this.http.get<T>(`${this.baseUrl}/${action}`);
   }
 
-  public getById(id: number) {
+  public getById(id: string) {
     return this.http.get<T>(`${this.baseUrl}/${id}`);
   }
 
