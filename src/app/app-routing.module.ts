@@ -1,31 +1,22 @@
+import { FeaturesComponent } from './features/features.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
     path: '',
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-      },
-      {
-        path: 'products',
-        loadChildren: () =>
-          import('./features/products/products.module').then((m) => m.ProductsModule),
-      },
-      {
-        path: 'users',
-        loadChildren: () =>
-          import('./features/users/users.module').then((m) => m.UsersModule),
-      },
-    ],
+    component: FeaturesComponent,
+    loadChildren: () =>
+      import('./features/features.module').then((m) => m.FeaturesModule),
   },
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
