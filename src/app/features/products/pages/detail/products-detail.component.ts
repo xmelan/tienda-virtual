@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from './../../../../shared/services/product/product.service';
 import { ImageService } from './../../../../shared/services/image/image.service';
 import { Product } from './../../../../shared/models/product.model';
 import { Component } from '@angular/core';
@@ -14,47 +16,29 @@ export class ProductsDetailComponent {
   public tooltips = ['Terrible', 'Malo', 'Normal', 'Bueno', 'Muy bueno'];
   public value = this.getRandomInt();
 
-  public product: Product = {
-    id: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
-    name: 'Gorra',
-    marca: 'Nike',
-    productByPrices: [
-      {
-        id: 'ebf039d7-45c6-4965-8c2e-e7425f5bf5d5',
-        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
-        color: 'Rojo',
-        cost: 15,
-      },
-      {
-        id: '4e4f9b02-b81d-4ad6-8e7f-bb25aef8137d',
-        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
-        color: 'Negro',
-        cost: 12,
-      },
-      {
-        id: '102742c1-e2d2-45c2-a8df-9f93c59ec33a',
-        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
-        color: 'Verde',
-        cost: 14,
-      },
-      {
-        id: 'ce106e81-909f-4681-a880-8d7b26a6fbbc',
-        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
-        color: 'Azul',
-        cost: 13,
-      },
-    ],
-  };
+  public product: any;
 
   public selectedColor: string = '#000000';
   public cost!: number;
   public imageUrl!: string;
+  public id: string = '';
 
-  constructor(private imageService: ImageService) {
-    this.imageService
-      .getImageUrl(this.product.name)
-      .pipe(tap((response) => (this.imageUrl = response)))
-      .subscribe();
+  constructor(
+    private imageService: ImageService,
+    private service: ProductService,
+    private activatedRoute : ActivatedRoute
+  ) {
+    // this.imageService
+    //   .getImageUrl(this.product.name)
+    //   .pipe(tap((response) => (this.imageUrl = response)))
+    //   .subscribe();
+    this.activatedRoute.params.subscribe(({id})=> this.id = id)
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getById(this.id)
   }
 
   private getRandomInt() {
@@ -63,5 +47,12 @@ export class ProductsDetailComponent {
 
   public selectColor(a: any) {
     this.cost = a.cost;
+  }
+
+  public getById(id: string) {
+    this.service
+      .getById(id)
+      .pipe(tap((response) => (this.product = response,console.log('hola',response))))
+      .subscribe();
   }
 }

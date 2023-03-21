@@ -12,9 +12,7 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired
-        >Marca</nz-form-label
-      >
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Marca</nz-form-label>
       <nz-form-control
         [nzSm]="14"
         [nzXs]="24"
@@ -23,8 +21,6 @@
         <input nz-input type="text" id="marca" formControlName="marca" />
       </nz-form-control>
     </nz-form-item>
-
-    <!-- <nz-divider></nz-divider> -->
 
     <div formArrayName="productByPrices">
       <div *ngFor="let item of productByPrices.controls; index as productIndex">
@@ -69,17 +65,29 @@
             <div class="inner-box">
               <nz-form-item>
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button nz-button nzType="primary" (click)="addProductPrice()">+</button>
+                  <button
+                    nz-button
+                    nzType="primary"
+                    (click)="addProductPrice()"
+                  >
+                    +
+                  </button>
                 </nz-form-control>
               </nz-form-item>
             </div>
           </div>
 
-          <div nz-col class="gutter-row" [nzSpan]="4" >
+          <div nz-col class="gutter-row" [nzSpan]="4">
             <div class="inner-box">
               <nz-form-item>
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button nz-button nzType="primary" (click)="removeProductPrice(productIndex)">-</button>
+                  <button
+                    nz-button
+                    nzType="primary"
+                    (click)="removeProductPrice(productIndex)"
+                  >
+                    -
+                  </button>
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -90,7 +98,9 @@
 
     <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="10">
-        <button nz-button nzType="primary" (click)="submitForm()">Agregar producto</button>
+        <button nz-button nzType="primary" (click)="saveOrUpdate()">
+          {{ this.isUpdatedForm ? "Actualizar producto" : "Agregar producto" }}
+        </button>
       </nz-form-control>
     </nz-form-item>
   </form>

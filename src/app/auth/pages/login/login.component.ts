@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 export class LoginComponent {
   Login!: FormGroup;
 
-  constructor(private fb: FormBuilder, private services: AuthService, private route: Router){ 
+  constructor(private fb: FormBuilder, private services: AuthService, private route: Router){
     localStorage.clear();
   }
 
@@ -27,7 +27,7 @@ export class LoginComponent {
       this.services.post(this.Login.value, 'Login').subscribe(result => {
         if(result != null){
           localStorage.setItem('token', `${result.token}`)
-          this.route.navigate([''])
+          this.route.navigate(['/products/list'])
         }
       });
     } else {
