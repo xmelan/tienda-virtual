@@ -13,6 +13,38 @@ import { Router } from '@angular/router';
 })
 export class ProductsCreateComponent {
   productForm!: FormGroup;
+  isUpdatedForm : boolean = false;
+  public product: Product = {
+    id: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
+    name: 'Gorra',
+    marca: 'Nike',
+    productByPrices: [
+      {
+        id: 'ebf039d7-45c6-4965-8c2e-e7425f5bf5d5',
+        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
+        color: 'Rojo',
+        cost: 15,
+      },
+      {
+        id: '4e4f9b02-b81d-4ad6-8e7f-bb25aef8137d',
+        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
+        color: 'Negro',
+        cost: 12,
+      },
+      {
+        id: '102742c1-e2d2-45c2-a8df-9f93c59ec33a',
+        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
+        color: 'Verde',
+        cost: 14,
+      },
+      {
+        id: 'ce106e81-909f-4681-a880-8d7b26a6fbbc',
+        productId: 'f51f8c7d-982d-46df-9ea9-5368d7d46112',
+        color: 'Azul',
+        cost: 13,
+      },
+    ],
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -22,17 +54,32 @@ export class ProductsCreateComponent {
 
   ngOnInit(): void {
     this.setForm();
+    this.setFormValues();
+  }
+
+  public setFormValues(){
+    if (this.router.url.includes('update')) {
+      this.isUpdatedForm = true;
+
+      const itemForms = this.product.productByPrices.map(item => this.fb.group({
+        color: [item.color],
+        cost: [item.cost]
+      }));
+
+      itemForms.forEach(itemForm => this.productByPrices.push(itemForm));
+      this.productByPrices.removeAt(0);
+    }
   }
 
   private setForm() {
     this.productForm = this.fb.group({
-      name: [null, [Validators.required]],
-      marca: [null, [Validators.required]],
-      productByPrices: this.fb.array([this.newproductByPrices()]),
+      name: [ this.isUpdatedForm ? 'this.product.name' : null, [Validators.required]],
+      marca: [ this.isUpdatedForm ? 'this.product.marca' :null, [Validators.required]],
+      productByPrices: this.isUpdatedForm ? null: this.fb.array([this.newproductByPrices()]),
     });
   }
 
-  submitForm(): void {
+  public submitForm(): void {
     if (this.productForm.valid) {
       const product: Product = this.formatProductBody(this.productForm.value);
       this.productService

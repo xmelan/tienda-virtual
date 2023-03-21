@@ -4,7 +4,8 @@
 
 export const enviroment = {
   production: false,
-  apiUrl: 'https://localhost:44355/api',
+  // apiUrl: 'https://localhost:44355/api',
+  apiUrl: 'https://reqres.in/api',
 };
 
 /*

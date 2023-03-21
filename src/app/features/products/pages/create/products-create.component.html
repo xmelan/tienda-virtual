@@ -36,11 +36,12 @@
                   >Color</nz-form-label
                 >
                 <nz-form-control [nzSm]="14" nzErrorTip="El campo es inválido">
-                  <nz-select formControlName="color">
-                    <nz-option nzValue="blanco" nzLabel="Blanco"></nz-option>
-                    <nz-option nzValue="rojo" nzLabel="Rojo"></nz-option>
-                    <nz-option nzValue="negro" nzLabel="Negro"></nz-option>
-                  </nz-select>
+                  <input
+                    nz-input
+                    type="text"
+                    id="color"
+                    formControlName="color"
+                  />
                 </nz-form-control>
               </nz-form-item>
             </div>

@@ -1,3 +1,4 @@
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,10 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -31,7 +36,11 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzImageModule,
     NzDescriptionsModule,
     NzRadioModule,
-    NzTagModule
+    NzTagModule,
+    NzBadgeModule,
+    NzRateModule,
+    NzDividerModule,
+    NzSegmentedModule
   ],
   exports:[
     NzCardModule,
@@ -48,7 +57,12 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzImageModule,
     NzDescriptionsModule,
     NzRadioModule,
-    NzTagModule
+    NzTagModule,
+    NzBadgeModule,
+    NzRateModule,
+    NzDividerModule,
+    NzSegmentedModule
+
   ]
 })
 export class SharedModule { }
